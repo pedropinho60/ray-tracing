@@ -1,8 +1,8 @@
 #include <cstdint>
 #include <iostream>
 
-#include "common.hpp"
 #include "background.hpp"
+#include "common.hpp"
 
 int main() {
   const std::uint16_t width{400};
@@ -10,7 +10,7 @@ int main() {
   const std::uint8_t max_channel_value{255};
 
   Background bg{{RGBColor(0, 255, 51), RGBColor(255, 255, 51),
-                      RGBColor(255, 0, 51), RGBColor(0, 0, 51)}};
+                 RGBColor(255, 0, 51), RGBColor(0, 0, 51)}};
 
   std::cout << "P3\n";
   std::cout << width << ' ' << height << '\n';

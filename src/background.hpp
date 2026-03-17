@@ -1,3 +1,6 @@
+#ifndef BACKGROUND_HPP
+#define BACKGROUND_HPP
+
 #include <array>
 #include <vector>
 
@@ -42,3 +45,5 @@ public:
     return lerp(top, bot, v);
   }
 };
+
+#endif // BACKGROUND_HPP

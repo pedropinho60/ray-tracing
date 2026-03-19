@@ -12,10 +12,4 @@ struct RGBColor {
       : red{red}, green{green}, blue{blue} {}
 };
 
-struct Point2 {
-  std::uint16_t x;
-  std::uint16_t y;
-  Point2(std::uint16_t x, std::uint16_t y) : x{x}, y{y} {}
-};
-
 #endif // COMMON_HPP

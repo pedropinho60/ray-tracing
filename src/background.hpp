@@ -38,11 +38,11 @@ public:
   /// Dtro
   ~Background() {};
   /// Sample and returns a color, based on the raster coordinate.
-  RGBColor sampleUV(float u, float v) const {
-    RGBColor top = lerp(corners[tl], corners[tr], u);
-    RGBColor bot = lerp(corners[bl], corners[br], u);
+  RGBColor sampleUV(float normalized_row, float normalized_col) const {
+    RGBColor top = lerp(corners[tl], corners[tr], normalized_col);
+    RGBColor bot = lerp(corners[bl], corners[br], normalized_col);
 
-    return lerp(top, bot, v);
+    return lerp(top, bot, normalized_row);
   }
 };
 

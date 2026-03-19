@@ -20,17 +20,16 @@ class App {
         std::cout << width << ' ' << height << '\n';
         std::cout << (int)max_channel_value << '\n';
 
-        for (std::uint16_t y{0}; y < height; ++y) {
-          float v = static_cast<float>(y) / (height - 1);
-          for (std::uint16_t x{0}; x < width; ++x) {
-            float u = static_cast<float>(x) / (width - 1);
-            RGBColor color = bg.sampleUV(u, v);
-            film.add_sample({x, y}, color);
-
+        for (std::uint16_t row{0}; row < height; ++row) {
+          float normalized_row = static_cast<float>(row) / (height - 1);
+          for (std::uint16_t col{0}; col < width; ++col) {
+            float normalized_col = static_cast<float>(col) / (width - 1);
+            RGBColor color = bg.sampleUV(normalized_row, normalized_col);
+            film.add_sample(row, col, color);
           }
         }
 
-        film.write_out();
+        film.write_ppm();
     }
 };
 

@@ -12,9 +12,10 @@ RGBColor Background::lerp(const RGBColor &A, const RGBColor &B, float t) const {
                   (1 - t) * A.blue + t * B.blue);
 }
 
-  RGBColor Background::sampleUV(float normalized_row, float normalized_col) const {
-    RGBColor top = lerp(corners[tl], corners[tr], normalized_col);
-    RGBColor bot = lerp(corners[bl], corners[br], normalized_col);
+RGBColor Background::blerp(float normalized_row,
+                              float normalized_col) const {
+  RGBColor top = lerp(corners[tl], corners[tr], normalized_col);
+  RGBColor bot = lerp(corners[bl], corners[br], normalized_col);
 
-    return lerp(top, bot, normalized_row);
-  }
+  return lerp(top, bot, normalized_row);
+}

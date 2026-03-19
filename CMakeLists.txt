@@ -20,5 +20,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 # add_subdirectory(lib_lodepng) # This will ask this lib to be build
 set ( APP_NAME "rt3")
 add_executable(rt3
+	src/background.cpp
+	src/film.cpp
+	src/app.cpp
 	src/main.cpp
 )

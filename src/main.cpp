@@ -5,3 +5,11 @@ int main() {
 
     app.render();
 }
+
+// paramset (generictype, valuetype)
+//
+// parser xml
+//
+// menu
+//
+// transformar atributos em ponteiro

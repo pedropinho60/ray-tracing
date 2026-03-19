@@ -2,13 +2,11 @@
 
 #include "film.hpp"
 
-Film::Film(std::uint16_t width, std::uint16_t height,
-           std::uint8_t max_channel_value)
-    : width{width}, height{height}, max_channel_value{max_channel_value},
+Film::Film(std::uint16_t width, std::uint16_t height)
+    : width{width}, height{height},
       buffer{static_cast<size_t>(width * height)} {}
 
-void Film::add_sample(const Point point,
-                      const RGBColor color) {
+void Film::add_sample(const Point point, const RGBColor color) {
   buffer[point.row * width + point.col] = color;
 }
 

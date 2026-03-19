@@ -29,7 +29,7 @@ public:
   /// Dtro
   ~Background() {};
   /// Sample and returns a color, based on the raster coordinate.
-  RGBColor sampleUV(float normalized_row, float normalized_col) const;
+  RGBColor blerp(float normalized_row, float normalized_col) const;
 };
 
 #endif // BACKGROUND_HPP

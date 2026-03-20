@@ -1,15 +1,11 @@
-#include "app.hpp"
+#include "../include/app.hpp"
 
 int main() {
-    App app;
+  App app;
 
-    app.render();
+  app.render();
 }
 
-// paramset (generictype, valuetype)
-//
 // parser xml
 //
 // menu
-//
-// transformar atributos em ponteiro

@@ -1,12 +1,18 @@
-#include "app.hpp"
-#include "background.hpp"
-#include "film.hpp"
 #include <memory>
+
+#include "../include/app.hpp"
+#include "../include/background.hpp"
+#include "../include/film.hpp"
 
 std::unique_ptr<Film> App::film;
 std::unique_ptr<Background> App::bg;
 
 void App::render() {
+  film = std::make_unique<Film>(400, 200);
+  bg = std::make_unique<Background>(
+      std::vector<RGBColor>{RGBColor(0, 255, 51), RGBColor(255, 255, 51),
+                            RGBColor(255, 0, 51), RGBColor(0, 0, 51)});
+
   for (std::uint16_t row{0}; row < film->height; ++row) {
     float normalized_row = static_cast<float>(row) / (film->height - 1);
 

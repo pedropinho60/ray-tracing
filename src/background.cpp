@@ -1,4 +1,4 @@
-#include "background.hpp"
+#include "../include/background.hpp"
 
 Background::Background(const std::vector<RGBColor> &colors) {
   corners[0] = colors[0];
@@ -12,8 +12,7 @@ RGBColor Background::lerp(const RGBColor &A, const RGBColor &B, float t) const {
                   (1 - t) * A.blue + t * B.blue);
 }
 
-RGBColor Background::blerp(float normalized_row,
-                              float normalized_col) const {
+RGBColor Background::blerp(float normalized_row, float normalized_col) const {
   RGBColor top = lerp(corners[tl], corners[tr], normalized_col);
   RGBColor bot = lerp(corners[bl], corners[br], normalized_col);
 

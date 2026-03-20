@@ -9,6 +9,7 @@ class Film {
 public:
   const std::uint16_t width;
   const std::uint16_t height;
+
 private:
   const std::uint8_t max_channel_value{255};
   std::vector<RGBColor> buffer;

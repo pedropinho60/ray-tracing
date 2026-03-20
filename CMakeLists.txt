@@ -24,4 +24,5 @@ add_executable(rt3
 	src/film.cpp
 	src/app.cpp
 	src/main.cpp
+	src/tinyxml2.cpp
 )

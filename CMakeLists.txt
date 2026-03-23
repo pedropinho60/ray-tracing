@@ -25,5 +25,5 @@ add_executable(rt3
 	src/app.cpp
 	src/parser.cpp
 	src/main.cpp
-	src/tinyxml2.cpp
+	lib_tinyxml2/tinyxml2.cpp
 )

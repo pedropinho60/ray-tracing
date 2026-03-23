@@ -10,7 +10,7 @@
 #include "../include/common.hpp"
 #include "../include/app.hpp"
 #include "../include/parser.hpp"
-#include "../include/tinyxml2.h"
+#include "../lib_tinyxml2/tinyxml2.h"
 
 namespace fs = std::filesystem;
 

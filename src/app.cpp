@@ -1,5 +1,4 @@
 #include <cstdint>
-#include <iostream>
 #include <memory>
 
 #include "../include/app.hpp"
@@ -21,7 +20,7 @@ void App::render() {
     }
   }
 
-  film->write_ppm();
+  film->write_image();
 }
 
 void App::create_background(const ParamSet &ps) {
@@ -43,7 +42,10 @@ void App::create_film(const ParamSet &ps) {
   auto x_res = ps.retrieve<std::uint16_t>("x_res").value_or({});
   auto y_res = ps.retrieve<std::uint16_t>("y_res").value_or({});
 
-  App::film = std::make_unique<Film>(x_res, y_res);
+  auto filename = ps.retrieve<std::string>("filename").value_or({});
+  auto filetype = ps.retrieve<std::string>("img_type").value_or({});
+
+  App::film = std::make_unique<Film>(x_res, y_res, filename, filetype);
 }
 
 void App::world_begin(const ParamSet &ps) {}

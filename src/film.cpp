@@ -1,22 +1,71 @@
+#include <fstream>
+#include <iomanip>
 #include <iostream>
 
 #include "../include/film.hpp"
 
-Film::Film(std::uint16_t width, std::uint16_t height)
-    : width{width}, height{height},
-      buffer{static_cast<size_t>(width * height)} {}
+Film::Film(std::uint16_t width, std::uint16_t height, std::string filename,
+           std::string filetype)
+    : width{width}, height{height}, filename{filename},
+      buffer{static_cast<size_t>(width * height)} {
+  if (filetype == "png") {
+    this->filetype = PNG;
+  } else if (filetype == "ppm") {
+    this->filetype = PPM;
+  } else {
+    std::string filetype_guess;
+
+    size_t pos = filename.find_last_of('.');
+
+    if (pos == std::string::npos) {
+      filetype_guess = "";
+    } else {
+      filetype_guess = filename.substr(pos + 1);
+    }
+
+    if (filetype_guess == "png") {
+      this->filetype = PNG;
+    } else {
+      this->filetype = PPM;
+    }
+  }
+}
 
 void Film::add_sample(const Point point, const RGBColor color) {
   buffer[point.row * width + point.col] = color;
 }
 
+void Film::write_image() {
+  switch (filetype) {
+    case PPM:
+      write_ppm();
+      break;
+    case PNG:
+      write_png();
+      break;
+  }
+}
+
 void Film::write_ppm() {
-  std::cout << "P3\n";
-  std::cout << width << ' ' << height << '\n';
-  std::cout << (int)max_channel_value << '\n';
+  std::ofstream file{filename};
+
+  if (!file.is_open()) {
+    std::ostringstream msg;
+    msg << "Error opening file " << std::quoted(filename);
+    throw std::runtime_error(msg.str());
+  }
+
+  file << "P3\n";
+  file << width << ' ' << height << '\n';
+  file << (int)max_channel_value << '\n';
 
   for (auto color : buffer) {
-    std::cout << (int)color.red << ' ' << (int)color.green << ' '
-              << (int)color.blue << '\n';
+    file << (int)color.red << ' ' << (int)color.green << ' ' << (int)color.blue
+         << '\n';
   }
+
+  file.close();
+}
+
+void Film::write_png() {
 }

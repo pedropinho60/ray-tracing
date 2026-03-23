@@ -26,4 +26,5 @@ add_executable(rt3
 	src/parser.cpp
 	src/main.cpp
 	lib_tinyxml2/tinyxml2.cpp
+	lib_lodepng/lodepng.cpp
 )

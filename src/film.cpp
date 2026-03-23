@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "../include/film.hpp"
+#include "../lib_lodepng/lodepng.h"
 
 Film::Film(std::uint16_t width, std::uint16_t height, std::string filename,
            std::string filetype)
@@ -68,4 +69,21 @@ void Film::write_ppm() {
 }
 
 void Film::write_png() {
+  static_assert(sizeof(RGBColor) == 3, "RGBColor must be tightly packed");
+
+  unsigned error = lodepng::encode(
+    filename,
+    reinterpret_cast<const unsigned char*>(buffer.data()),
+    width,
+    height,
+    LCT_RGB,
+    8
+  );
+
+  if (error) {
+    std::ostringstream msg;
+    msg << "PNG encode error " << error
+        << ": " << lodepng_error_text(error);
+    throw std::runtime_error(msg.str());
+  }
 }

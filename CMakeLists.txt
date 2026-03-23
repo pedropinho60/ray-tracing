@@ -23,6 +23,7 @@ add_executable(rt3
 	src/background.cpp
 	src/film.cpp
 	src/app.cpp
+	src/parser.cpp
 	src/main.cpp
 	src/tinyxml2.cpp
 )

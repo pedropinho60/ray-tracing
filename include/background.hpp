@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "common.hpp"
+#include "param_set.hpp"
 
 class Background {
 private:
@@ -26,10 +27,15 @@ private:
 public:
   /// Ctro receives a list of four colors, for each corner.
   Background(const std::vector<RGBColor> &colors);
+
+  Background(const Background* bg);
   /// Dtro
   ~Background() {};
   /// Sample and returns a color, based on the raster coordinate.
   RGBColor blerp(float normalized_row, float normalized_col) const;
 };
+
+Background* create_single_color_background(const ParamSet& ps);
+Background* create_multicolor_background(const ParamSet& ps);
 
 #endif // BACKGROUND_HPP

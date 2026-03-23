@@ -3,7 +3,7 @@
 
 #include "object.hpp"
 
-template <typename T> class ValueType : Object {
+template <typename T> class ValueType : public Object {
 public:
   T value;
 

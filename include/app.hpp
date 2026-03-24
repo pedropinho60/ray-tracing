@@ -12,6 +12,7 @@ class App {
   static std::unique_ptr<Film> film;
 
 public:
+  static void run(const char* filename);
   static void render();
 
   static void world_begin(const ParamSet &ps);

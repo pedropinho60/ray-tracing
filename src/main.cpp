@@ -1,19 +1,16 @@
+#include <iostream>
+
 #include "../include/app.hpp"
-#include "../include/parser.hpp"
 
 int main(int argc, char* argv[]) {
-  const char* filename;
-  if (argc > 1) {
-    filename = argv[1];
-  } else {
-    filename = "scenes/scene01.xml";
+  if (argc <= 1) {
+    std::cerr << "Error: Missing scene file name\n";
+    return 1;
   }
 
-  Parser::parse(filename);
+  const char* filename = argv[1];
+
+  App::run(filename);
 
   App::render();
 }
-
-// parser xml
-//
-// menu

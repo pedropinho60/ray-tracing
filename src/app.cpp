@@ -4,9 +4,14 @@
 #include "../include/app.hpp"
 #include "../include/background.hpp"
 #include "../include/film.hpp"
+#include "../include/parser.hpp"
 
 std::unique_ptr<Film> App::film;
 std::unique_ptr<Background> App::bg;
+
+void App::run(const char* filename) {
+  Parser::parse(filename);
+}
 
 void App::render() {
   for (std::uint16_t row{0}; row < film->height; ++row) {

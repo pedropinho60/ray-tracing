@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "../include/film.hpp"
+#include "../include/point.hpp"
 #include "../lib_lodepng/lodepng.h"
 
 Film::Film(std::uint16_t width, std::uint16_t height, std::string filename,
@@ -32,7 +33,7 @@ Film::Film(std::uint16_t width, std::uint16_t height, std::string filename,
   }
 }
 
-void Film::add_sample(const Point point, const RGBColor color) {
+void Film::add_sample(const Point2D point, const RGBColor color) {
   buffer[point.row * width + point.col] = color;
 }
 

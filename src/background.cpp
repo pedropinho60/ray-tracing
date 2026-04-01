@@ -1,7 +1,7 @@
 #include <vector>
 
 #include "../include/background.hpp"
-#include "../include/common.hpp"
+#include "../include/rgb_color.hpp"
 
 Background::Background(const std::vector<RGBColor> &colors) {
   corners[0] = colors[0];
@@ -38,7 +38,6 @@ Background* create_multicolor_background(const ParamSet &ps) {
   auto tr = ps.retrieve<RGBColor>("tr").value_or({});
   auto br = ps.retrieve<RGBColor>("br").value_or({});
   auto bl = ps.retrieve<RGBColor>("bl").value_or({});
-
 
   return new Background{{tl, tr, br, bl}};
 }

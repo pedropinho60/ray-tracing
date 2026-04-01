@@ -1,9 +1,10 @@
 #ifndef FILM_HPP
 #define FILM_HPP
 
-#include "common.hpp"
 #include <cstdint>
 #include <vector>
+
+#include "rgb_color.hpp"
 
 class Film {
 public:
@@ -26,7 +27,7 @@ private:
 public:
   Film(std::uint16_t width, std::uint16_t height, std::string filename, std::string filetype);
 
-  void add_sample(const Point point, const RGBColor color);
+  void add_sample(const Point2D point, const RGBColor color);
   void write_image();
   void write_ppm();
   void write_png();

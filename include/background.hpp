@@ -4,7 +4,7 @@
 #include <array>
 #include <vector>
 
-#include "common.hpp"
+#include "rgb_color.hpp"
 #include "param_set.hpp"
 
 class Background {

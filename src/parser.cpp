@@ -7,8 +7,9 @@
 #include <vector>
 #include <sstream>
 
-#include "../include/common.hpp"
 #include "../include/app.hpp"
+#include "../include/window_size.hpp"
+#include "../include/rgb_color.hpp"
 #include "../include/parser.hpp"
 #include "../lib_tinyxml2/tinyxml2.h"
 
@@ -80,7 +81,68 @@ bool convert_rgb_color(const std::string& attr_name, const std::string& attr_con
   return true;
 }
 
+bool convert_point_3d(const std::string& attr_name, const std::string& attr_content, ParamSet* ps) {
+  assert(ps);
+  std::istringstream iss{ attr_content };
+  double x, y, z;
+
+  if (!(iss >> x >> y >> z)) {
+    return false;
+  }
+
+  Point3D point = {x, y, z};
+  ps->assign(attr_name, point);
+
+  return true;
+}
+
+bool convert_vector_3d(const std::string& attr_name, const std::string& attr_content, ParamSet* ps) {
+  assert(ps);
+  std::istringstream iss{ attr_content };
+  double x, y, z;
+
+  if (!(iss >> x >> y >> z)) {
+    return false;
+  }
+
+  Vector vec = {x, y, z};
+  ps->assign(attr_name, vec);
+
+  return true;
+}
+
+bool convert_window_size(const std::string& attr_name, const std::string& attr_content, ParamSet* ps) {
+  assert(ps);
+  std::istringstream iss{ attr_content };
+  double l, r, b, t;
+
+  if (!(iss >> l >> r >> b >> t)) {
+    return false;
+  }
+
+  WindowSize ws = {l, r, b, t};
+  ps->assign(attr_name, ws);
+
+  return true;
+}
+
 std::unordered_map<std::string, std::vector<std::string>> tag_catalog{
+  {
+    "lookat",
+    {
+      "look_from",
+      "look_at",
+      "up",
+    },
+  },
+  {
+    "camera",
+    {
+      "type",
+      "screen_window",
+      "fovy",
+    },
+  },
   {
     "background",
     {
@@ -119,6 +181,8 @@ std::unordered_map<std::string, std::vector<std::string>> tag_catalog{
 };
 
 std::unordered_map<std::string, std::function<void(const ParamSet&)>> api_functions{
+  { "lookat", App::lookat },
+  { "camera", App::create_camera },
   { "background", App::create_background },
   { "world_begin", App::world_begin },
   { "world_end", App::world_end },
@@ -145,6 +209,13 @@ std::unordered_map<std::string, ConverterFunction> converters{
   { "filename", convert<std::string> },
   { "img_type", convert<std::string> },
   { "gamma_corrected", convert<bool> },
+  // Lookat attributes.
+  { "look_at", convert_point_3d },
+  { "look_from", convert_point_3d },
+  { "up", convert_vector_3d },
+  // Camera attributes.
+  { "screen_window", convert_window_size },
+  { "fovy", convert<std::uint8_t> },
 };
 
 bool is_valid_tag(std::string_view tag_name) {

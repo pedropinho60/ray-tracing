@@ -3,7 +3,6 @@
 #include <iostream>
 
 #include "../include/film.hpp"
-#include "../include/point.hpp"
 #include "../lib_lodepng/lodepng.h"
 
 Film::Film(std::uint16_t width, std::uint16_t height, std::string filename,

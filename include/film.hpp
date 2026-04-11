@@ -2,9 +2,11 @@
 #define FILM_HPP
 
 #include <cstdint>
+#include <string>
 #include <vector>
 
 #include "rgb_color.hpp"
+#include "point_2d.hpp"
 
 class Film {
 public:

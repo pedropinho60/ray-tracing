@@ -10,6 +10,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic")
 string(APPEND CMAKE_CXX_FLAGS " -Wall -Werror")
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DDEBUG -fstandalone-debug")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
 # Use this to define the symbol DEBUG
 # add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
@@ -25,6 +26,10 @@ add_executable(rt3
 	src/app.cpp
 	src/parser.cpp
 	src/main.cpp
+	src/orthographic_camera.cpp
+	src/perspective_camera.cpp
+	src/point_3d.cpp
+	src/vector.cpp
 	lib_tinyxml2/tinyxml2.cpp
 	lib_lodepng/lodepng.cpp
 )

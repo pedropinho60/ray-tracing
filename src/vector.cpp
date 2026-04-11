@@ -11,14 +11,10 @@ double Vector::dot_product(Vector other) {
 }
 
 Vector Vector::cross_product(Vector other) {
-    // z1 = x2 * y3 - x3 * y2
-    // z2 = x3 * y1 - x1 * y3
-    // z3 = x1 * y2 - x2 * y1
-
     return {
-        -(this->y * other.z - this->z * other.y),
-        -(this->z * other.x - this->x * other.z),
-        -(this->x * other.y - this->y * other.x)
+        other.y * this->z - other.z * this->y,
+        other.z * this->x - other.x * this->z,
+        other.x * this->y - other.y * this->x,
     };
 }
 

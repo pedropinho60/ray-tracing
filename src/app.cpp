@@ -16,6 +16,21 @@ std::unique_ptr<Background> App::bg;
 Point3D App::look_from, App::look_at;
 Vector App::up;
 
+bool intersect_p(const Ray& ray, Point3D c, double r) {
+  Point3D o = ray.origin;
+  Vector d_hat = ray.direction.normalize();
+
+  Vector oc = o.sub(c);
+
+  double parallel_len = oc.dot_product(d_hat);
+  Vector oc_perp = oc.sub(d_hat.scalar_multiplication(parallel_len));
+
+  double delta = r*r - oc_perp.dot_product(oc_perp);
+
+  return delta >= 0;
+}
+
+
 void App::run(const char* filename) {
   Parser::parse(filename);
 }
@@ -27,10 +42,22 @@ void App::render() {
     for (std::uint16_t col{0}; col < camera->film->width; ++col) {
       Ray ray = camera->generate_ray(row, col);
 
-      std::cout << "pixel(" << row << "," << col << "), Ray: " << ray << "\n";
+      // std::cout << "pixel(" << row << "," << col << "), Ray: " << ray << "\n";
 
-      float normalized_col = static_cast<float>(col) / (camera->film->width - 1);
-      RGBColor color = bg->blerp(normalized_row, normalized_col);
+      RGBColor color;
+
+
+      bool intersect = intersect_p(ray, {-1, 0.5, 5}, 0.4) 
+        || intersect_p(ray, {1, -0.5, 8}, 0.4)
+        || intersect_p(ray, {-1, -1.5, 3.5}, 0.4);
+
+      if (intersect) {
+        color = {255, 0, 0};
+      } else {
+        float normalized_col = static_cast<float>(col) / (camera->film->width - 1);
+        color = bg->blerp(normalized_row, normalized_col);
+      }
+
 
       camera->film->add_sample({row, col}, color);
     }

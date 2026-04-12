@@ -157,6 +157,14 @@ std::unordered_map<std::string, std::vector<std::string>> tag_catalog{
     },
   },
   {
+    "object",
+    {
+      "type",
+      "radius",
+      "center",
+    },
+  },
+  {
     "film",
     {
       "type",
@@ -215,7 +223,11 @@ std::unordered_map<std::string, ConverterFunction> converters{
   { "up", convert_vector_3d },
   // Camera attributes.
   { "screen_window", convert_window_size },
-  { "fovy", convert<std::uint8_t> },
+  { "fovy", convert<std::uint16_t> },
+
+  // TODO: Change to actual types.
+  { "radius", convert<std::string> },
+  { "center", convert<std::string> },
 };
 
 bool is_valid_tag(std::string_view tag_name) {

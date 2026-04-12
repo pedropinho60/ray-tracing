@@ -1,6 +1,5 @@
 #include "../include/orthographic_camera.hpp"
 #include <cassert>
-#include <iostream>
 
 OrthographicCamera::OrthographicCamera(WindowSize dimensions, Point3D look_at,
                                        Point3D look_from, Vector up)
@@ -10,18 +9,13 @@ OrthographicCamera::OrthographicCamera(WindowSize dimensions, Point3D look_at,
 Ray OrthographicCamera::generate_ray(int row, int col) {
     assert(film && "film is null");
 
-    double u = left + (right - left) * (row + 0.5) / film->width;
-    double v = bottom + (top - bottom) * (col + 0.5) / film->height;
+    double u = left + (right - left) * (col + 0.5) / film->width;
+    double v = bottom + (top - bottom) * (film->height - 1 - row + 0.5) / film->height;
 
     Vector gaze = look_at.sub(look_from);
     Vector vector_w = gaze.normalize();
-    Vector vector_u = up.cross_product(vector_w).normalize();
-    Vector vector_v = vector_w.cross_product(vector_u).normalize();
-
-    // std::cout << "gaze: " << gaze << "\n";
-    // std::cout << "vector_w: " << vector_w << "\n";
-    // std::cout << "vector_u: " << vector_u << "\n";
-    // std::cout << "vector_v: " << vector_v << "\n";
+    Vector vector_u = vector_w.cross_product(up).normalize();
+    Vector vector_v = vector_u.cross_product(vector_w).normalize();
 
     Point3D origin = look_from.add(vector_u.scalar_multiplication(u))
                          .add(vector_v.scalar_multiplication(v));

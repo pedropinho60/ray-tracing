@@ -193,6 +193,7 @@ std::unordered_map<std::string, std::function<void(const ParamSet&)>> api_functi
   { "camera", App::create_camera },
   { "background", App::create_background },
   { "world_begin", App::world_begin },
+  { "object", App::create_object },
   { "world_end", App::world_end },
   { "film", App::create_film },
 };
@@ -224,10 +225,9 @@ std::unordered_map<std::string, ConverterFunction> converters{
   // Camera attributes.
   { "screen_window", convert_window_size },
   { "fovy", convert<std::uint16_t> },
-
-  // TODO: Change to actual types.
-  { "radius", convert<std::string> },
-  { "center", convert<std::string> },
+  // Sphere attributes.
+  { "radius", convert<double> },
+  { "center", convert_point_3d },
 };
 
 bool is_valid_tag(std::string_view tag_name) {

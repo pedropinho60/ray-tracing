@@ -9,6 +9,7 @@ struct Ray {
   Vector direction;
 
   Ray(Point3D origin, Vector direction) : origin{origin}, direction{direction} {}
+
   Point3D expand(double t) {
     return origin.add(direction.scalar_multiplication(t));
   }
@@ -17,7 +18,6 @@ struct Ray {
     os << "[o=" << ray.origin << ", d=" << ray.direction << "]";
     return os;
   }
-
 };
 
 #endif // RAY_HPP

@@ -30,6 +30,7 @@ add_executable(rt3
 	src/perspective_camera.cpp
 	src/point_3d.cpp
 	src/vector.cpp
+	src/sphere.cpp
 	lib_tinyxml2/tinyxml2.cpp
 	lib_lodepng/lodepng.cpp
 )

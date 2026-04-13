@@ -1,6 +1,5 @@
 #include <cassert>
 #include <cstdint>
-#include <iostream>
 #include <memory>
 #include <stdexcept>
 
@@ -29,12 +28,8 @@ void App::render() {
     for (std::uint16_t col{0}; col < scene->camera->film->width; ++col) {
       Ray ray = scene->camera->generate_ray(row, col);
 
-      // std::cout << "pixel(" << row << "," << col << "), Ray: " << ray << "\n";
-
-      RGBColor color;
-
       float normalized_col = static_cast<float>(col) / (scene->camera->film->width - 1);
-      color = scene->background->blerp(normalized_row, normalized_col);
+      RGBColor color = scene->background->blerp(normalized_row, normalized_col);
 
       for (auto p : scene->primitives) {
         if (p->intersect_p(ray)) {
@@ -103,5 +98,4 @@ void App::create_object(const ParamSet &ps) {
 
 void App::world_begin(const ParamSet &ps) {}
 
-void App::world_end(const ParamSet &ps) {
-}
+void App::world_end(const ParamSet &ps) {}

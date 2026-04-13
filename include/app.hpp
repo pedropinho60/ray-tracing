@@ -3,8 +3,6 @@
 
 #include <memory>
 
-#include "background.hpp"
-#include "camera.hpp"
 #include "param_set.hpp"
 #include "scene.hpp"
 
